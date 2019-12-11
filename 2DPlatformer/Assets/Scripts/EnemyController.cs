@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    //
+    // VARIBLES FOR PATROLLING
     Vector3 v_Distance;
     int i_distenceCounter = 0;
     bool b_findDistanceControl = true;
     bool b_IsReachedThePoint = false;
-
     GameObject[] temp;
-    //
+    [SerializeField] private GameObject g_PatrolPoints;
 
     void Start()
     {
-        temp = new GameObject[transform.childCount];
+        temp = new GameObject[g_PatrolPoints.transform.childCount];
 
         for (int i = 0; i < temp.Length; i++)
         {
-            temp[i] = transform.GetChild(0).gameObject;
+            temp[i] = g_PatrolPoints.transform.GetChild(0).gameObject;
             temp[i].transform.SetParent(transform.parent);
         }
     }
@@ -27,6 +26,7 @@ public class EnemyController : MonoBehaviour
     void FixedUpdate()
     {
         PatrolBetweenPoints();
+
     }
 
     // Patrol Between Child Points
