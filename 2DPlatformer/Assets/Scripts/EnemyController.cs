@@ -18,6 +18,15 @@ public class EnemyController : MonoBehaviour
     enum EnemyState { PATROLLING, ATTACKING }
     EnemyState enemyState;
 
+    Animator _animator;
+    Rigidbody2D _rb;
+
+    private void Awake()
+    {
+        _animator = gameObject.GetComponent<Animator>();
+        _rb = gameObject.GetComponent<Rigidbody2D>();
+    }
+
     void Start()
     {
         // Get the points that the enemy patrolling between
@@ -52,6 +61,10 @@ public class EnemyController : MonoBehaviour
             if (b_IsEnemyCanAttack)
             {
                 enemyState = EnemyState.ATTACKING;
+
+                // Run the attack animation
+                _animator.SetTrigger("WalkingToAttack");
+
             }
             else
             {
@@ -61,6 +74,9 @@ public class EnemyController : MonoBehaviour
         else
         {
             enemyState = EnemyState.PATROLLING;
+
+            // Run the patrol animation again
+            _animator.SetTrigger("AttackToWalking");
         }
     }
 
@@ -73,7 +89,7 @@ public class EnemyController : MonoBehaviour
         }
         float dis = Vector3.Distance(transform.position, points[i_distenceCounter].transform.position);
 
-        transform.position += v_Distance * Time.deltaTime * 10; // WE USE RIGIDBODY INSTEAD
+        transform.position += v_Distance * Time.deltaTime * 10;
 
         if (dis < 0.5f)
         {
@@ -101,6 +117,11 @@ public class EnemyController : MonoBehaviour
 
     void Attack()
     {
-        Debug.Log("Attacking");
+
+    }
+
+    void Die()
+    {
+
     }
 }
