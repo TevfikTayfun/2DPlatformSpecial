@@ -22,21 +22,34 @@ public class PlayerDash : MonoBehaviour
 	{
 		if(i_direction == 0)
 		{
-			if (Input.GetKeyDown(KeyCode.A) && Input.GetKey(KeyCode.C))
+			if (Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKey(KeyCode.C))
 			{
 				i_direction = 1;
 			}
-			else if(Input.GetKeyDown(KeyCode.D) && Input.GetKey(KeyCode.C))
+
+			else if (Input.GetKeyDown(KeyCode.RightArrow) && Input.GetKey(KeyCode.C))
 			{
 				i_direction = 2;
 			}
-			else if (Input.GetKeyDown(KeyCode.W) && Input.GetKey(KeyCode.C))
+
+			else if (Input.GetKeyDown(KeyCode.UpArrow) && Input.GetKey(KeyCode.C))
 			{
 				i_direction = 3;
 			}
-			else if (Input.GetKeyDown(KeyCode.S) && Input.GetKey(KeyCode.C))
+
+			else if (Input.GetKeyDown(KeyCode.DownArrow) && Input.GetKey(KeyCode.C))
 			{
 				i_direction = 4;
+			}
+
+			else if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.UpArrow) && Input.GetKeyDown(KeyCode.X))
+			{
+				i_direction = 5;
+			}
+
+			else if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.UpArrow) && Input.GetKeyDown(KeyCode.X))
+			{
+				i_direction = 6;
 			}
 		}
 		else
@@ -45,7 +58,7 @@ public class PlayerDash : MonoBehaviour
 			{
 				i_direction = 0;
 				f_dashTime = f_startDashTime;
-				//rb.velocity = Vector2.zero;
+				rb.velocity = Vector2.zero;
 			}
 			else
 			{
@@ -55,17 +68,30 @@ public class PlayerDash : MonoBehaviour
 				{
 					rb.velocity = Vector2.left * f_dashSpeed;
 				}
+
 				else if(i_direction == 2)
 				{
-					rb.AddForce(Vector2.right * f_dashSpeed, ForceMode2D.Impulse);				
+					rb.velocity = Vector2.right * f_dashSpeed;
 				}
+
 				else if (i_direction == 3)
 				{
 					rb.velocity = Vector2.up * f_dashSpeed;
 				}
+
 				else if (i_direction == 4)
 				{
 					rb.velocity = Vector2.down * f_dashSpeed;
+				}
+
+				else if(i_direction == 5)
+				{
+					rb.velocity = (Vector2.up + Vector2.right).normalized * f_dashSpeed;
+				}
+
+				else if (i_direction == 6)
+				{
+					rb.velocity = (Vector2.up + Vector2.left).normalized * f_dashSpeed;
 				}
 			}
 		}

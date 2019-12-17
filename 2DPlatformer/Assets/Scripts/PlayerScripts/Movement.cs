@@ -10,7 +10,7 @@ public class Movement : MonoBehaviour
 
     [Header("Floats")]
     [SerializeField]
-    private float f_speed = 10f;
+    private float f_speed = 15f;
     [SerializeField][Range(1,10)]
     private float f_jumpForce;
     [SerializeField]
@@ -27,18 +27,7 @@ public class Movement : MonoBehaviour
     private bool canMove;
     private bool wallJumped;
 
-    /*[Header("Dash")]
-    private int i_direction;
-    public float f_dashSpeed;
-    private float f_dashTime;
-    public float f_startDashTime;*/
 
-
-    private void Awake()
-    {
-        //GetComponent<PlayerDash>().enabled = false;
-        //GetComponent<PlayerDash>().enabled = true;
-    }
 
     void Start()
     {
@@ -50,7 +39,7 @@ public class Movement : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
-
+        
         float xRaw = Input.GetAxisRaw("Horizontal");
         float yRaw = Input.GetAxisRaw("Vertical");
 
@@ -92,37 +81,23 @@ public class Movement : MonoBehaviour
 
     private void Walk(Vector2 dir)
     {
-
-        //if (!wallJumped)
-            rb.velocity = (new Vector2(dir.x * f_speed, rb.velocity.y));
-        /*else
-        {
-            rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * f_speed, rb.velocity.y)), wallJumpLerp * Time.deltaTime);
-        }*/
+      rb.velocity = (new Vector2(dir.x * f_speed, rb.velocity.y));     
     }
 
     private void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && (coll.onGround))
+        if(Input.GetKeyDown(KeyCode.Space) && (coll.onGround) && !coll.onWall)
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.up * f_jumpForce;
         }
 
-        /*if(wallGrab && coll.onLeftWall && Input.GetButton("Jump"))
-        {
-            GetComponent<Rigidbody2D>().velocity = Vector2.right *  20;
-        }*/
-        /*
-        if (coll.onRightWall && Input.GetButtonDown("Jump"))
-        {
-            GetComponent<Rigidbody2D>().velocity = Vector2.left * f_jumpForce;
-        }*/
     }
 
     private void WallSlide()
     {
         rb.velocity = new Vector2(rb.velocity.x, -f_slideSpeed);
     }
+
 
 
     /*private void Dash(float x, float y)
