@@ -26,7 +26,6 @@ public class PlayerDash : MonoBehaviour
 			{
 				i_direction = 1;
 			}
-
 			else if (Input.GetKeyDown(KeyCode.RightArrow) && Input.GetKey(KeyCode.C))
 			{
 				i_direction = 2;
