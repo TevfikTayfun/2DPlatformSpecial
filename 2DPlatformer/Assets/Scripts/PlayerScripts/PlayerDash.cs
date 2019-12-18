@@ -10,7 +10,7 @@ public class PlayerDash : MonoBehaviour
 	private float f_dashTime;
 	public float f_startDashTime;
 
-
+	public GameObject ghost;
 
 	private void Start()
 	{
@@ -57,7 +57,7 @@ public class PlayerDash : MonoBehaviour
 			{
 				i_direction = 0;
 				f_dashTime = f_startDashTime;
-				rb.velocity = Vector2.zero;
+				rb.velocity = Vector2.zero; 
 			}
 			else
 			{
@@ -66,31 +66,37 @@ public class PlayerDash : MonoBehaviour
 				if( i_direction == 1)
 				{
 					rb.velocity = Vector2.left * f_dashSpeed;
+					GameObject ghostBaby = Instantiate(ghost, transform.position, transform.rotation);
 				}
 
 				else if(i_direction == 2)
 				{
 					rb.velocity = Vector2.right * f_dashSpeed;
+					GameObject ghostBaby = Instantiate(ghost, transform.position, transform.rotation);
 				}
 
 				else if (i_direction == 3)
 				{
 					rb.velocity = Vector2.up * f_dashSpeed;
+					GameObject ghostBaby = Instantiate(ghost, transform.position, transform.rotation);
 				}
 
 				else if (i_direction == 4)
 				{
 					rb.velocity = Vector2.down * f_dashSpeed;
+					GameObject ghostBaby = Instantiate(ghost, transform.position, transform.rotation);
 				}
 
 				else if(i_direction == 5)
 				{
 					rb.velocity = (Vector2.up + Vector2.right).normalized * f_dashSpeed;
+					GameObject ghostBaby = Instantiate(ghost, transform.position, transform.rotation);
 				}
 
 				else if (i_direction == 6)
 				{
 					rb.velocity = (Vector2.up + Vector2.left).normalized * f_dashSpeed;
+					GameObject ghostBaby = Instantiate(ghost, transform.position, transform.rotation);
 				}
 			}
 		}

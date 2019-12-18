@@ -27,12 +27,13 @@ public class Movement : MonoBehaviour
     private bool canMove;
     private bool wallJumped;
 
-
+    public SpriteRenderer playerSprite;
 
     void Start()
     {
         coll = GetComponent<PlayerCollisions>();
         rb = GetComponent<Rigidbody2D>();
+        playerSprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
@@ -81,14 +82,27 @@ public class Movement : MonoBehaviour
 
     private void Walk(Vector2 dir)
     {
-      rb.velocity = (new Vector2(dir.x * f_speed, rb.velocity.y));     
+        rb.velocity = (new Vector2(dir.x * f_speed, rb.velocity.y));     
+
     }
 
     private void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && (coll.onGround) && !coll.onWall)
+        if(Input.GetKeyDown(KeyCode.Space) && (coll.onGround))
         {
-            GetComponent<Rigidbody2D>().velocity = Vector2.up * f_jumpForce;
+            rb.velocity = Vector2.up * f_jumpForce;
+        }
+
+        else if(Input.GetKeyDown(KeyCode.Space) && (coll.onLeftWall))
+        {
+            rb.velocity = Vector2.up * Vector2.right * f_jumpForce;
+            Debug.Log("LeftWall");
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Space) && (coll.onRightWall))
+        {
+            rb.velocity = Vector2.left * f_jumpForce * 40;
+            Debug.Log("RightWall");
         }
 
     }
