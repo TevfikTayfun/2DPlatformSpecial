@@ -18,6 +18,7 @@ public class PlayerDash : MonoBehaviour
 		f_dashTime = f_startDashTime;
 	}
 
+
 	private void Update()
 	{
 		if(i_direction == 0)
@@ -59,6 +60,7 @@ public class PlayerDash : MonoBehaviour
 				f_dashTime = f_startDashTime;
 				rb.velocity = Vector2.zero; 
 			}
+
 			else
 			{
 				f_dashTime -= Time.deltaTime;
@@ -101,5 +103,6 @@ public class PlayerDash : MonoBehaviour
 			}
 		}
 	}
+
 
 }
