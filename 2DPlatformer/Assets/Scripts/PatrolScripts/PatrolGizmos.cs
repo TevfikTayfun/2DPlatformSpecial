@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class EnemyPatrolGizmos : MonoBehaviour
+public class PatrolGizmos : MonoBehaviour
 {
 
 #if UNITY_EDITOR
@@ -31,14 +31,14 @@ public class EnemyPatrolGizmos : MonoBehaviour
 // EDITOR CODES
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(EnemyPatrolGizmos))]
+[CustomEditor(typeof(PatrolGizmos))]
 [System.Serializable]
 
 class enemyPatrolEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        EnemyPatrolGizmos script = (EnemyPatrolGizmos)target; // Reach the codes above
+        PatrolGizmos script = (PatrolGizmos)target; // Reach the codes above
         if (GUILayout.Button("CREAT POINT", GUILayout.MinWidth(100), GUILayout.MinHeight(20)))
         {
             GameObject newPosition = new GameObject(); // Create new object

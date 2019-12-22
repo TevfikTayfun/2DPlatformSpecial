@@ -2,30 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class PatrolBetweenPoints : MonoBehaviour
 {
-    // VARIBLES FOR PATROLLING
     Vector3 v_Distance;
     int i_distenceCounter = 0;
     bool b_findDistanceControl = true;
     bool b_IsReachedThePoint = false;
+
     GameObject[] points;
     [SerializeField] private GameObject g_PatrolPoints;
-
-    public bool b_IsEnemyCanAttack;
-    [HideInInspector] public bool b_IsPlayerSeenByEnemy;
-
-    enum EnemyState { PATROLLING, ATTACKING }
-    EnemyState enemyState;
-
-    Animator _animator;
-    Rigidbody2D _rb;
-
-    private void Awake()
-    {
-        _animator = gameObject.GetComponent<Animator>();
-        _rb = gameObject.GetComponent<Rigidbody2D>();
-    }
 
     void Start()
     {
@@ -36,51 +21,9 @@ public class EnemyController : MonoBehaviour
             points[i] = g_PatrolPoints.transform.GetChild(0).gameObject;
             points[i].transform.SetParent(transform.parent);
         }
-
-        enemyState = EnemyState.PATROLLING;
     }
 
-    void FixedUpdate()
-    {
-        AttackOrPatrolControl();
-
-        if(enemyState == EnemyState.PATROLLING)
-        {
-            PatrolBetweenPoints();
-        }
-        if(enemyState == EnemyState.ATTACKING)
-        {
-            Attack();
-        }
-    }
-
-    void AttackOrPatrolControl()
-    {
-        if (b_IsPlayerSeenByEnemy)
-        {
-            if (b_IsEnemyCanAttack)
-            {
-                enemyState = EnemyState.ATTACKING;
-
-                // Run the attack animation
-                _animator.SetTrigger("WalkingToAttack");
-
-            }
-            else
-            {
-                enemyState = EnemyState.PATROLLING;
-            }
-        }
-        else
-        {
-            enemyState = EnemyState.PATROLLING;
-
-            // Run the patrol animation again
-            _animator.SetTrigger("AttackToWalking");
-        }
-    }
-
-    void PatrolBetweenPoints()
+    public void Patrolling(float speed)
     {
         if (b_findDistanceControl)
         {
@@ -89,7 +32,7 @@ public class EnemyController : MonoBehaviour
         }
         float dis = Vector3.Distance(transform.position, points[i_distenceCounter].transform.position);
 
-        transform.position += v_Distance * Time.deltaTime * 10;
+        transform.position += v_Distance * Time.deltaTime * speed;
 
         if (dis < 0.5f)
         {
@@ -115,13 +58,4 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void Attack()
-    {
-
-    }
-
-    void Die()
-    {
-
-    }
 }
