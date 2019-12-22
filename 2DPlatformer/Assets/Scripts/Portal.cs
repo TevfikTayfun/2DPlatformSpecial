@@ -8,8 +8,8 @@ public class Portal : MonoBehaviour
     float distance = 0.3f;
     public bool isPortal1;
 
-    float cooldown = 1;
-    float cooldownTimer;
+    float cooldown = 0.2f;
+    static float cooldownTimer;
 
     private void Start()
     {
@@ -37,6 +37,7 @@ public class Portal : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, collision.transform.position) > distance && cooldownTimer <= 0 )
         {
+            Debug.Log("TriggerEnter " + gameObject.name);
             collision.transform.position = new Vector2(destination.position.x , destination.position.y);
             cooldownTimer = cooldown;
             

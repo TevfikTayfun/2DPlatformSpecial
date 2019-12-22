@@ -23,31 +23,31 @@ public class PlayerDash : MonoBehaviour
 	{
 		if(i_direction == 0)
 		{
-			if (Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKey(KeyCode.C))
+			if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.C))
 			{
 				i_direction = 1;
 			}
-			else if (Input.GetKeyDown(KeyCode.RightArrow) && Input.GetKey(KeyCode.C))
+			else if (Input.GetKey(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.C))
 			{
 				i_direction = 2;
 			}
 
-			else if (Input.GetKeyDown(KeyCode.UpArrow) && Input.GetKey(KeyCode.C))
+			else if (Input.GetKey(KeyCode.UpArrow) && Input.GetKeyDown(KeyCode.C))
 			{
-				i_direction = 3;
+				//i_direction = 3;
 			}
 
-			else if (Input.GetKeyDown(KeyCode.DownArrow) && Input.GetKey(KeyCode.C))
+			else if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.C))
 			{
-				i_direction = 4;
+				//i_direction = 4;
 			}
 
-			else if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.UpArrow) && Input.GetKeyDown(KeyCode.X))
+			else if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.UpArrow) && Input.GetKeyDown(KeyCode.Space))
 			{
 				i_direction = 5;
 			}
 
-			else if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.UpArrow) && Input.GetKeyDown(KeyCode.X))
+			else if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.UpArrow) && Input.GetKeyDown(KeyCode.Space))
 			{
 				i_direction = 6;
 			}
@@ -58,7 +58,7 @@ public class PlayerDash : MonoBehaviour
 			{
 				i_direction = 0;
 				f_dashTime = f_startDashTime;
-				rb.velocity = Vector2.zero; 
+				//rb.velocity = Vector2.zero; 
 			}
 
 			else
